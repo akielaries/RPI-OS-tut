@@ -9,10 +9,13 @@
 * the better
 *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-* _start: control is handed off from the bootloader to kernel
-*       set up stack ptr
-* 
-*
+* _start : control is handed off from the bootloader to kernel
+* - set up stack ptr
+* - set up C globals in BSS section
+*       * __bss_start __bss_end : defined in linker_aarch64.ld
+*       * label 1 : 16 bytes of consecutive zeros loaded ino BSS section
+*       * label 2 : loops til BSS is 0'd
+* - jump into the kernel main()
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 */
 
