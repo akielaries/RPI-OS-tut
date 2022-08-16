@@ -31,10 +31,10 @@ Project repo piggybacking off a tutorial on how to create a simple OS for a rasp
 - [License](#lock-license)
 
 ## About
-Add a detailed introduction about the project here, everything you want the reader to know.
+Add details on completion
 
 ## Usage
-Write about how to use this project.
+TODO
 
 ### Installation
 - Steps on how to install this project, to use it.
@@ -66,23 +66,29 @@ Add a file structure here with the basic details about files, below is an exampl
 
 ```
 .
-├── assets
-│   ├── css
-│   │   ├── index-ui.css
-│   │   └── rate-ui.css
-│   ├── images
-│   │   ├── icons
-│   │   │   ├── shrink-button.png
-│   │   │   └── umbrella.png
-│   │   ├── logo_144.png
-│   │   └── Untitled-1.psd
-│   └── javascript
-│       ├── index.js
-│       └── rate.js
-├── CNAME
-├── index.html
-├── rate.html
-└── README.md
+├── build
+│   ├── linker_aarch64.ld   // links our boot_*.S file with our dependent C files
+│   ├── Makefile            // compiles our project
+│   └── Makefile_cpy
+├── hello.c
+├── lib
+│   ├── core
+│   │   ├── stdio.h
+│   │   └── stdlib.h
+│   └── kernel
+│       └── uart.h
+├── LICENSE
+├── README.md
+└── src
+    ├── core
+    │   ├── stdio.c
+    │   └── stdlib.c
+    └── kernel
+        ├── boot_aarch32.S   // kernel entry pt for aarch32 
+        ├── boot_aarch64.S   // kernel entry pt for aarch64
+        ├── kernel.c
+        └── uart.c
+
 ```
 
 | No | File Name | Details 
@@ -96,8 +102,8 @@ Write the build Instruction here.
 Write the deployment instruction here.
 
 
- ### Contribution
-
+### Contribution
+Todo
 
 ### Guideline
 
