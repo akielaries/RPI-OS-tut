@@ -30,8 +30,6 @@
 */
 .section ".text.boot"
 .globl _start
-    // boot code of the AArch32 processor
-    0x8000
 
 /* 
 * entry point for the kernel
@@ -72,7 +70,8 @@ _start:
     // 3/4 cores are now not in use
 
     // declares the address of where our C stack ptr will start, moves downwards
-    mov sp, #0x8000
+    mov sp, #0x8000                 // 0x8000 = boot code of AArch32 processor
+
     /*
     * BSS  = block starting symbol : statically allocated variables 
     * declared but not assigned values
