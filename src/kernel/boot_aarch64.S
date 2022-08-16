@@ -31,7 +31,6 @@
 .section ".text.boot"
 .globl _start
     .org 0x80000
-
 /* 
 * entry point for the kernel
 * x0 -> 32 bit pointer to DTB in memory (primary core only) / 0 (secondary cores)
@@ -44,28 +43,35 @@
 */
 // starting point of program
 _start:
+    /*
+    * mrs :
+    * and : BITWISE operator; returns 1 if both bits are 1, 0 otherwise
+    * cbz :
+    */
     // check processor ID is zero; confirm running on main core, or wfe
     mrs     x1, mpidr_el1
     and     x1, x1, #3
-    cbz     c1, 2f
+    cbz     x1, 2f
 
 
 1:      
     /*
-    * b   : branch to (or jump)
     * wfe : wait for event
+    * mov : move
+    * ldr : loads a register
+    * b   : branch to (or jump)
     */
     // infinite loop waiting for event; getting into main core
     wfe
     b       1b
-    
+2:
     /*
     * mov : move
     * ldr : loads a register
     * b   : branch to (or jump)
     */
 
-    // set stack 
+    // main core; set stack 
     ldr     x1, = _start        // load _start into register x5
     mov     sp, x1              // move x5 into our stack ptr
     /*
@@ -83,19 +89,19 @@ _start:
 
 3:
     /*
-    * cbz :
     * str :
     * sub :
     * cbnz:
     */
     cbz     w6, 4f
-    str     xzr, [x5], #8
-
+    str     xzr, [x1], #8
+    sub     w6, w6, #1
+    cbnz    w2, 3b              // loop != 0
 
 // jumps to C code and does not return
 4:
     bl      kernel_main
-    // failsafe includes halting this core
+    // failsafe includes halting main core
     b lb
 
 
