@@ -100,7 +100,7 @@ _start:
     stmia r4!, {r5-r8}              /* store values of r5-r8 into addr of r4;
                                     * 4 bytes each = 16 bytes total of 0's
                                     */
-// loop until r4 >= r9 & bss is 0'd ot
+// loop until r4 is greater >= r9 & bss is 0'd ot
 2:
     /*
     * blo : returns lower result of 
