@@ -8,28 +8,6 @@ Project repo piggybacking off a tutorial on how to create a simple OS for a rasp
   raspberry pi 2. I will be following that tutorial as well as exploring creation
   for aarch64 rpi 3 & 4
 
-## Index
-
-- [About](#beginner-about)
-- [Usage](#zap-usage)
-  - [Installation](#electric_plug-installation)
-  - [Commands](#package-commands)
-- [Development](#wrench-development)
-  - [Pre-Requisites](#notebook-pre-requisites)
-  - [Developmen Environment](#nut_and_bolt-development-environment)
-  - [File Structure](#file_folder-file-structure)
-  - [Build](#hammer-build)  
-  - [Deployment](#rocket-deployment)  
-- [Community](#cherry_blossom-community)
-  - [Contribution](#fire-contribution)
-  - [Branches](#cactus-branches)
-  - [Guideline](#exclamation-guideline)  
-- [FAQ](#question-faq)
-- [Resources](#page_facing_up-resources)
-- [Gallery](#camera-gallery)
-- [Credit/Acknowledgment](#star2-creditacknowledgment)
-- [License](#lock-license)
-
 ## About
 Add details on completion
 
@@ -52,6 +30,22 @@ $ add installations steps if you have to.
 
 ### Pre-Requisites
 List all the pre-requisites the system needs to develop this project.
+This project assumes you are using a linux dev environment. I am using
+Kali linux on x86_64. Here are some of the prereqs for getting this 
+project srtarted.
+- <a href="https://docs.brew.sh/Homebrew-on-Linux" target="_blank">Install homebrew for linux</a> 
+- <a href="https://developer.arm.com/downloads/-/gnu-a" target="_blank">Download the ARM GCC compiler</a>
+install ARM GCC compiler via homebrew. <br>
+- "elf" : bare metal
+- "linux" : linux-based applications
+```
+brew install aarch64-elf-gcc
+sudo apt-get install gcc-aarch64-linux-gnu
+```
+- <a href="" target="_blank"> </a>
+- <a href="" target="_blank"> </a>
+
+
 - A tool
 - B tool
 
