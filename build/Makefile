@@ -18,7 +18,7 @@ OFILES 		= $(CFILES:.c=.o)
 SFILES	   := $(shell find $(PROJDIR) -name '*.S')
 CREATEDOF  := $(shell find $(PROJDIR) -name '*.o')
 
-BOOT		= ../src/kernel
+BOOT		= ../kernel
 # kernel8 = aarch64 mode (ARMv8)
 EXE-LNK		= kernel8.elf
 IMG			= kernel8.img
