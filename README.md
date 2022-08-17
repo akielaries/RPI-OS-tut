@@ -16,6 +16,12 @@ TODO
 
 ### Installation
 - Steps on how to install this project, to use it.
+
+```
+$ git clone git@github.com:akielaries/RPI-OS_tut.git
+$ cd /build &&
+make
+```
 - Be very detailed here, For example, if you have tools which run on different operating systems, write installation steps for all of them.
 
 ```
@@ -39,8 +45,8 @@ install ARM GCC compiler via homebrew. <br>
 - "elf" : bare metal
 - "linux" : linux-based applications
 ```
-brew install aarch64-elf-gcc
-sudo apt-get install gcc-aarch64-linux-gnu
+$ brew install aarch64-elf-gcc
+$ sudo apt-get install gcc-aarch64-linux-gnu
 ```
 - <a href="" target="_blank"> </a>
 - <a href="" target="_blank"> </a>
@@ -87,16 +93,11 @@ Add a file structure here with the basic details about files, below is an exampl
     └── src
 ```
 
-| No | File Name | Details 
-|----|------------|-------|
-| 1  | index | Entry point
-
 ### Build
 Write the build Instruction here.
 
 ### Deployment
 Write the deployment instruction here.
-
 
 ### Contribution
 Todo
@@ -109,7 +110,6 @@ the open brace ({) goes at the end of the line before the start of the code bloc
 the close brace (}) goes on its own line, indented to match the beginning of the line <br>
 containing the corresponding open brace, and include a descriptor on the closing brace <br>
 line that indicates which opening brace it matches <br>
-
 
 ## Resources
 Add important resources here
