@@ -66,29 +66,31 @@ Add a file structure here with the basic details about files, below is an exampl
 
 ```
 .
+├── boot
+│   ├── boot_aarch32.S      // kernel entry pt for aarch32
+│   └── boot_aarch64.S      // kernel entry pt for aarch64
 ├── build
-│   ├── linker_aarch64.ld   // links our boot_*.S file with our dependent C files
+│   ├── linker_aarch64.ld   // links our boot_*.S file w/ our dependent C files
 │   ├── Makefile            // compiles our project
-│   └── Makefile_cpy
-├── hello.c
-├── lib
-│   ├── core
-│   │   ├── stdio.h
-│   │   └── stdlib.h
-│   └── kernel
+│   └── Makefile_cpy        // used this as ref from prev projs
+├── imgs
+│   └── img                 // includes images of project
+── include
+│   └── core
+│       ├── stdio.h
+│       ├── stdlib.h
 │       └── uart.h
-├── LICENSE
-├── README.md
+├── kernel
+│   └── kernel.c
+├── lib
+│   └── core
+│       ├── stdio.c
+│       ├── stdlib.c
+│       └── uart.c
+├── LICENSE                 // licensing information
+├── README.md               // some details on this project (always WIP)
 └── src
-    ├── core
-    │   ├── stdio.c
-    │   └── stdlib.c
-    └── kernel
-        ├── boot_aarch32.S   // kernel entry pt for aarch32 
-        ├── boot_aarch64.S   // kernel entry pt for aarch64
-        ├── kernel.c
-        └── uart.c
-
+    └── src
 ```
 
 | No | File Name | Details 
