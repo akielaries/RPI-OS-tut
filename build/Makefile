@@ -13,12 +13,15 @@ LINKFILE	= linker_aarch64.ld
 OBJCPY		= $(UTILSPATH)/aarch64-elf-objcopy
 
 # CFILES = $(wildcard *.c)
+# search for all files w/ .c extension
 CFILES	   := $(shell find $(PROJDIR) -name '*.c')
 OFILES 		= $(CFILES:.c=.o)
 SFILES	   := $(shell find $(PROJDIR) -name '*.S')
 CREATEDOF  := $(shell find $(PROJDIR) -name '*.o')
 
-BOOT		= ../kernel
+BOOT		= ../boot
+AARCH32		= $(BOOT)/boot_aarch32.S
+AARCH64		= $(BOOT)/boot_aarch64.S
 # kernel8 = aarch64 mode (ARMv8)
 EXE-LNK		= kernel8.elf
 IMG			= kernel8.img
@@ -26,8 +29,8 @@ TARGET2		= main
 
 all: clean $(IMG)
 
-boot.o: $(BOOT)/boot_aarch64.S
-	$(CC) $(CFLAGS) -c $(BOOT)/boot_aarch64.S $(BOOT)/-o boot_aarch64.o
+boot.o: $(AARCH64)
+	$(CC) $(CFLAGS) -c $(AARCH64) $(BOOT)/-o boot_aarch64.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
