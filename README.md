@@ -4,9 +4,8 @@ Project repo piggybacking off a tutorial on how to create a simple OS for a rasp
 
 # Introduction
 - RPI-OS aarch32 & aarch64 
-- Project repo piggybacking off a tutorial on how to create a simple OS for aarch32
-  raspberry pi 2. I will be following that tutorial as well as exploring creation
-  for aarch64 rpi 3 & 4
+- Project repo piggybacking off of many online tutorial on how to create a simple OS for aarch32
+  raspberry pi 2. I will be exploring creation for aarch64 rpi 3 & 4
 
 ## About
 Add details on completion
@@ -35,7 +34,6 @@ $ add installations steps if you have to.
 - Langs close to the metal only
 
 ### Pre-Requisites
-List all the pre-requisites the system needs to develop this project.
 This project assumes you are using a linux dev environment. I am using
 Kali linux on x86_64. Here are some of the prereqs for getting this 
 project srtarted.
