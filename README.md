@@ -5,7 +5,7 @@ implementation on the aarch64 Raspberry Pi 3 & 4.
 
 # Introduction
 - RPI-OS aarch32 & aarch64 
-- Project repo piggybacking off of many online tutorial on how to create a simple OS for aarch32
+- Project repo piggybacking off of many online tutorials on how to create a simple OS for aarch32
   raspberry pi 2. I will be exploring creation for aarch64 rpi 3 & 4
 
 ## About
