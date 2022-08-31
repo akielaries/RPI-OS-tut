@@ -1,6 +1,7 @@
 # Work in progress...
 
-Project repo piggybacking off a tutorial on how to create a simple OS for a raspberry pi...
+Building an operating system on the Raspberry Pi 2 with eventual 
+implementation on the aarch64 Raspberry Pi 3 & 4. 
 
 # Introduction
 - RPI-OS aarch32 & aarch64 
@@ -129,6 +130,3 @@ add some pictures when its  time...
   * Paul Wratt
   * Jake Sandler
   * Akiel Aries
-
-## License
-TODO
