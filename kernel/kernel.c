@@ -1,6 +1,7 @@
 /*
- * kernel.c containts the very root of the kernel. This file is where
- * we transfer over control from assembly in our boot_aarch*.S file
+ * kernel.c containts the very root of the kernelf for this OS. I hope for this 
+ * code to be easily portable to other architechtures as well. This file is where
+ * we transfer over control from assembly in our boot_aarch*.S file to C.
  *
  */
 
@@ -21,10 +22,15 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags) {
     // initialize 
     uart_init();
     // print statement to console on successful execution
-    uart_puts("");
+    uart_puts("SUCCESS STMT:    1\r\n");
 
-
-
+    // infinite loop 
+    while (1) {
+        //
+        uart_putc(uart_getc());
+        //
+        uart_putc('\n');
+    }
 }
 
 
