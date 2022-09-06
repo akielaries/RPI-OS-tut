@@ -1,6 +1,5 @@
 /*
-* AArch64 mode
-* RPI 3 & 4 have 4 cores
+* AArch64 mode; developed for the RPI 3 & 4 
 * boot assembly file that is first thing the hardware
 * will execute in the kernel. This assembly code will
 * load the kernal telling it about C runtime environment
