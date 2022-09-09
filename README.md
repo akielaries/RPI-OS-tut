@@ -72,6 +72,11 @@ Add a file structure here with the basic details about files, below is an exampl
 │   ├── linker_aarch64.ld   // links our boot_*.S file w/ our dependent C files
 │   ├── Makefile            // compiles our project
 │   └── Makefile_cpy        // used this as ref from prev projs
+├── CONTRIBUTING.md
+├── docs
+│   ├── bug_report.md
+│   ├── feature_request.md
+│   └── pull-request.md
 ├── imgs
 │   └── img                 // includes images of project
 ── include
@@ -89,7 +94,7 @@ Add a file structure here with the basic details about files, below is an exampl
 ├── LICENSE                 // licensing information
 ├── README.md               // some details on this project (always WIP)
 └── src
-    └── src
+    └── src.c
 ```
 
 ### Build
