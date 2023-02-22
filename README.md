@@ -1,6 +1,11 @@
 # Work in progress...
 This project is part of a bigger toolchain aimed to be in a 
-hardware->software type sequence.
+hardware->software type sequence and as such is in the latter 
+piece of the puzzle/agenda at the moment. In the meantime 
+check out [openMTPK](https://github.com/akielaries/openMTPK),
+and open source mathematic package, as well as [chips](https://github.com/akielaries/chips), which aims to be similar to the RISC-V 
+implementation with a verified/described prototype of pieces
+making up a computer using electronic components. 
 
 Building an operating system on the Raspberry Pi 2 with eventual 
 implementation on the aarch64 Raspberry Pi 3 & 4. 
