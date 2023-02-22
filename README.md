@@ -1,4 +1,6 @@
 # Work in progress...
+This project is part of a bigger toolchain aimed to be in a 
+hardware->software type sequence.
 
 Building an operating system on the Raspberry Pi 2 with eventual 
 implementation on the aarch64 Raspberry Pi 3 & 4. 
