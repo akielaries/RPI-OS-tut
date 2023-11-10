@@ -65,12 +65,15 @@ _start:
     * ldr : loads a register
     * b   : branch to (or jump)
     */
+#ifndef MODEL_1
+
     // mrc <coproc>, opcode, Rt, Crn, Crm, {opcode2}
     mrc p15, #0, r1, c0, c0, #5     // read CPU ID register in c0, stores value in r1
     and r1, r1, #3                  // stores in r1 the AND op of r1 and #3
     cmp r1, #0                      // compares #0 to value in r1 (#0 - r1)
     bne halt                        // send the 3 cores to halt:
     // 3/4 cores are now not in use
+#endif
 
     // declares the address of where our C stack ptr will start, moves downwards
     mov sp, #0x8000                 // 0x8000 = boot code of AArch32 processor

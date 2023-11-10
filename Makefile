@@ -4,7 +4,7 @@ CXX 	= arm-none-eabi-g++
 
 compile:
 	${CC} -mcpu=cortex-a7 -fpic -ffreestanding -c boot_aarch32.S -o boot.o
-	${CC} -mcpu=cortex-a7 -fpic -ffreestanding -c kernel.c -o kernel.o
+	${CC} -mcpu=cortex-a7 -fpic -ffreestanding -std=gnu99 -c kernel.c -o kernel.o
 	${CC} -T linker_aarch32.ld -o piOS.elf -ffreestanding -O2 -nostdlib boot.o kernel.o
 
 

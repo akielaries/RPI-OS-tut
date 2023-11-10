@@ -4,9 +4,8 @@
 typedef enum {
     // The GPIO registers base address.
     PI01_GPIO_BASE = 0x20200000, // for raspi2 & 3, 0x20200000 for raspi1
-    PI23_GPIO_BASE = 0x3F200000, 
+    PI23_GPIO_BASE = 0x3F200000,
     PI04_GPIO_BASE = 0xff, // TODO figure this out
-
 
     // REGISTER OFFSETS
     GPPUD = (PI23_GPIO_BASE + 0x94),
