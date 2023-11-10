@@ -43,8 +43,8 @@ $ sudo apt-get install gcc-arm-none-eabi
 QEMU for ARM processors:
 ```
 $ sudo apt-get install qemu-system-arm
-``
-- <a href="https://developer.arm.com/downloads/-/gnu-a" target="_blank">Download the ARM GCC compiler</a>
+```
+https://developer.arm.com/downloads/-/gnu-a" target="_blank">Download the ARM GCC compiler
 
 ### Build
 TODO 
