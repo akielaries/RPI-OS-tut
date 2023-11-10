@@ -23,17 +23,6 @@ $ git clone git@github.com:akielaries/RPI-OS_tut.git
 $ cd /build &&
 make
 ```
-- Be very detailed here, For example, if you have tools which run on different operating systems, write installation steps for all of them.
-
-```
-$ add installations steps if you have to.
-```
-
-### Commands
-- Commands to start the project.
-
-## Development
-- Langs close to the metal only
 
 ### Pre-Requisites
 ARM gcc compiler toolchain:
