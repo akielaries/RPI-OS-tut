@@ -110,7 +110,7 @@ _start:
     * blx : copies address of next instruction into link register r14
     */
     cmp r4, r9                      // compare values at the start & end
-    blo lb                          // returns lower result 
+    blo 1b                          // returns lower result 
     ldr r3, =kernel_main            // load addr of C func kernel_main into r3
     blx r3                          // jump to previously loaded addr r3
 

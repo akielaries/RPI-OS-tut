@@ -1,5 +1,5 @@
 /*
- * function definitions for tree operations 
+ * function definitions for tree operations
  */
 
 #ifndef TREEOPS_H
