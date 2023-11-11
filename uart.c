@@ -87,3 +87,22 @@ void uart_puts(const char *str) {
         uart_putc((unsigned char)str[i]);
 }
 
+void gets(char *buffer, int buff_len) {
+    int i;
+    char c;
+
+    // leaveing a empty spot for the null char in buff
+    for (i = 0; (c = uart_getc()) != '\r' && buff_len > 1; i++, buff_len--) {
+        uart_putc(c);
+        buffer[i] = c;
+    }
+    uart_putc('\n');
+    if (c == '\n') {
+        buffer[i] = '\0';
+    }
+    else {
+        buffer[buff_len - 1] = '\0';
+    }
+}
+
+
