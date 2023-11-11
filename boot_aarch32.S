@@ -65,7 +65,7 @@ _start:
     * ldr : loads a register
     * b   : branch to (or jump)
     */
-#ifndef MODEL_1
+#ifndef PI_1
 
     // mrc <coproc>, opcode, Rt, Crn, Crm, {opcode2}
     mrc p15, #0, r1, c0, c0, #5     // read CPU ID register in c0, stores value in r1

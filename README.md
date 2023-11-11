@@ -36,7 +36,13 @@ $ sudo apt-get install qemu-system-arm
 https://developer.arm.com/downloads/-/gnu-a" target="_blank">Download the ARM GCC compiler
 
 ### Build
-TODO 
+```
+# compile image
+$ make compile_kernel RASPI_MODEL=2
+
+# run image with QEMU
+$ make piOS_qemu RASPI_MODEL=2
+```
 
 
 ## Resources

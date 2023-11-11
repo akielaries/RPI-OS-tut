@@ -1,6 +1,8 @@
 #ifndef __UART_H__
 #define __UART_H__
 
+#include <stdint.h>
+
 typedef enum {
     // The GPIO registers base address.
     PI01_GPIO_BASE = 0x20200000, // for raspi2 & 3, 0x20200000 for raspi1
@@ -33,5 +35,19 @@ typedef enum {
     UART0_ITOP = (PI23_UART_BASE + 0x88),
     UART0_TDR = (PI23_UART_BASE + 0x8C),
 } UART_ADDRS;
+
+void mmio_write(uint32_t reg, uint32_t data);
+
+uint32_t mmio_read(uint32_t reg);
+
+void delay(int32_t count);
+
+void uart_init();
+
+void uart_putc(unsigned char c);
+
+unsigned char uart_getc();
+
+void uart_puts(const char *str);
 
 #endif

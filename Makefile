@@ -1,22 +1,75 @@
 # Makefile compiling our project into an image
-CC 		= arm-none-eabi-gcc
-CXX 	= arm-none-eabi-g++
+CC 			= arm-none-eabi-gcc
+CXX 		= arm-none-eabi-g++
+CC_STD		= -std=gnu99
+CXX_STD		= -std=c++2a
 
-compile:
-	${CC} -mcpu=cortex-a7 -fpic -ffreestanding -c boot_aarch32.S -o boot.o
-	${CC} -mcpu=cortex-a7 -fpic -ffreestanding -std=gnu99 -c kernel.c -o kernel.o
-	${CC} -T linker_aarch32.ld -o piOS.elf -ffreestanding -O2 -nostdlib boot.o kernel.o
+# set variables based on Raspberry Pi Model
+ifeq ($(RASPI_MODEL), 1)
+    CPU 		= arm1176jzf-s
+    DIRECTIVES 	= -D PI_1
+	HOST		= raspi1ap
+endif
+
+ifeq ($(RASPI_MODEL), 2)
+    CPU 		= cortex-a7
+	DIRECTIVES 	= -D PI_2
+	BOOT 		= boot_aarch32.S
+	LINK		= linker_aarch32.ld
+	HOST      	= raspi2b
+endif
+
+ifeq ($(RASPI_MODEL), 3)
+    CPU 		= cortex-a53
+	DIRECTIVES 	= -D PI_3
+	BOOT 		= boot_aarch64.S
+	LINK		= linker_aarch64.ld
+	HOST		= raspi3
+endif
+
+ifeq ($(RASPI_MODEL), 4)
+    CPU 		= cortex-a72
+	DIRECTIVES 	= -D PI_4
+endif
+
+ifeq ($(RASPI_MODEL), 5)
+    CPU 		= cortex-a76
+	DIRECTIVES 	= -D PI_5
+endif
+
+CPU_FLGS	= -mcpu=$(CPU)
+C_FLGS		= -fpic -ffreestanding
+ADD_C_FLGS	= -g -Wno-unused-result -Wparentheses -Wsign-compare -DNDEBUG -Wall -Wextra -O2
+# source files
+SRCS		= kernel.c uart.c
+# corresponding object files
+OBJS		= $(SRCS:.c=.o)
+# final binary name
+ELF			= piOS.elf
+
+entrypoint: boot.o
+boot.o: $(BOOT)
+	$(CC) $(CPU_FLGS) $(C_FLGS) -c $(BOOT) -o boot.o
+
+%.o: %.c
+	$(CC) $(CPU_FLGS) $(C_FLGS) $(ADD_C_FLGS) -c $< -o $@
+
+compile_kernel: entrypoint $(OBJS)
+	$(CC) $(CPU_FLGS) -T $(LINK) -o $(ELF) $(C_FLGS) $(ADD_C_FLGS) -nostdlib boot.o $(OBJS)
 
 
 cpp_compile:
-	${CXX} -mcpu=cortex-a7 -fpic -ffreestanding -fno-exceptions -c boot_aarch32.S -o boot.o
-	${CXX} -mcpu=cortex-a7 -fpic -ffreestanding -fno-exceptions -c kernel.c -o kernel.o
-	${CXX} -T linker_aarch32.ld -o piOS.elf -ffreestanding -fno-exceptions -O2 -nostdlib boot.o kernel.o
+	$(CXX) -mcpu=cortex-a7 -fpic -ffreestanding -fno-exceptions -c boot_aarch32.S -o boot.o
+	$(CXX) -mcpu=cortex-a7 -fpic -ffreestanding -fno-exceptions -c kernel.c -o kernel.o
+	$(CXX) -T linker_aarch32.ld -o piOS.elf -ffreestanding -fno-exceptions -O2 -nostdlib boot.o kernel.o
 
-QEMU		= qemu-system-arm
+QEMU_ARM	= qemu-system-arm
 MEM			= -m 1024
-HOST		= -M raspi2b
-QEMU_FLGS	= -serial stdio -kernel
+Q_HOST		= -M $(HOST)
+Q_FLGS		= -serial stdio -kernel
+
+piOS_qemu:
+	$(QEMU_ARM) $(MEM) $(Q_HOST) $(Q_FLGS) $(ELF)
 
 run:
 	qemu-system-arm -m 1024 -M raspi2b -serial stdio -kernel piOS.elf
