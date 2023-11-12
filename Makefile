@@ -6,13 +6,15 @@ CXX_STD		= -std=c++2a
 
 # set variables based on Raspberry Pi Model
 ifeq ($(RASPI_MODEL), 1)
-    CPU 		= arm1176jzf-s
-    DIRECTIVES 	= -D PI_1
+	CPU 		= arm1176jzf-s
+	MEM			= 512
+	DIRECTIVES 	= -D PI_1
 	HOST		= raspi1ap
 endif
 
 ifeq ($(RASPI_MODEL), 2)
-    CPU 		= cortex-a7
+	CPU 		= cortex-a7
+	MEM			= 1024
 	DIRECTIVES 	= -D PI_2
 	BOOT 		= boot_aarch32.S
 	LINK		= linker_aarch32.ld
@@ -41,7 +43,7 @@ CPU_FLGS	= -mcpu=$(CPU)
 C_FLGS		= -fpic -ffreestanding
 ADD_C_FLGS	= -g -Wno-unused-result -Wparentheses -Wsign-compare -DNDEBUG -Wall -Wextra -O2
 # source files
-SRCS		= kernel.c uart.c
+SRCS		= kernel.c core.c uart.c mem.c
 # corresponding object files
 OBJS		= $(SRCS:.c=.o)
 # final binary name
@@ -64,12 +66,12 @@ cpp_compile:
 	$(CXX) -T linker_aarch32.ld -o piOS.elf -ffreestanding -fno-exceptions -O2 -nostdlib boot.o kernel.o
 
 QEMU_ARM	= qemu-system-arm
-MEM			= -m 1024
+Q_MEM		= -m $(MEM)
 Q_HOST		= -M $(HOST)
 Q_FLGS		= -serial stdio -kernel
 
 piOS_qemu:
-	$(QEMU_ARM) $(MEM) $(Q_HOST) $(Q_FLGS) $(ELF)
+	$(QEMU_ARM) $(Q_MEM) $(Q_HOST) $(Q_FLGS) $(ELF)
 
 run:
 	qemu-system-arm -m 1024 -M raspi2b -serial stdio -kernel piOS.elf

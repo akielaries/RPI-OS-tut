@@ -1,8 +1,5 @@
-/*
- * kernel.c containts the very root of the kernelf for this OS. I hope for this
- * code to be easily portable to other architechtures as well. This file is
- * where we transfer over control from assembly in our boot_aarch*.S file to C.
- *
+/**
+ * uart.c contains some of the core
  */
 
 #include "lib/uart.h"
@@ -20,6 +17,7 @@ uint32_t mmio_read(uint32_t reg) {
 }
 
 // Loop <delay> times in a way that the compiler won't optimize away
+// TODO can probably get rid of this or rethink implementation
 void delay(int32_t count) {
     asm volatile("__delay_%=: subs %[count], %[count], #1; bne __delay_%=\n"
                  : "=r"(count)
@@ -64,21 +62,33 @@ void uart_init() {
                (1 << 1) | (1 << 4) | (1 << 5) | (1 << 6) | (1 << 7) | (1 << 8) |
                    (1 << 9) | (1 << 10));
 
+    uart_control_t uart_control;
+
     // Enable UART0, receive & transfer part of UART.
-    mmio_write(UART0_CR, (1 << 0) | (1 << 8) | (1 << 9));
+    // mmio_write(UART0_CR, (1 << 0) | (1 << 8) | (1 << 9));
+    uart_control.uart_enabled = 1;
+    uart_control.transmit_enabled = 1;
+    uart_control.receive_enabled = 1;
+    mmio_write(UART0_CR, uart_control.as_int);
 }
 
 void uart_putc(unsigned char c) {
+    uart_flags_t flags;
     // Wait for UART to become ready to transmit.
-    while (mmio_read(UART0_FR) & (1 << 5)) {
-    }
+
+    do {
+        flags = read_flags();
+    } while (flags.transmit_queue_full);
     mmio_write(UART0_DR, c);
 }
 
 unsigned char uart_getc() {
     // Wait for UART to have received something.
-    while (mmio_read(UART0_FR) & (1 << 4)) {
-    }
+    uart_flags_t flags;
+    do {
+        flags = read_flags();
+    } while (flags.recieve_queue_empty);
+
     return mmio_read(UART0_DR);
 }
 
@@ -87,7 +97,7 @@ void uart_puts(const char *str) {
         uart_putc((unsigned char)str[i]);
 }
 
-void gets(char *buffer, int buff_len) {
+void uart_gets(char *buffer, int buff_len) {
     int i;
     char c;
 
@@ -99,10 +109,13 @@ void gets(char *buffer, int buff_len) {
     uart_putc('\n');
     if (c == '\n') {
         buffer[i] = '\0';
-    }
-    else {
+    } else {
         buffer[buff_len - 1] = '\0';
     }
 }
 
-
+uart_flags_t read_flags(void) {
+    uart_flags_t flags;
+    flags.as_int = mmio_read(UART0_FR);
+    return flags;
+}
