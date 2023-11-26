@@ -1,7 +1,7 @@
 #include "lib/mem.h"
 #include "lib/arm_tags.h"
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 
 extern uint8_t __end__;
 static uint32_t __num_pages__;

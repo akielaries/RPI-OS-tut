@@ -6,21 +6,20 @@
 #define PAGE_SZ 4096
 
 typedef struct {
-    uint8_t allocated: 1;   // allocated pages
-    uint8_t kernel_pg: 1;   // kernel pages
-    uint32_t reserved: 30;  // reserved pages
+    uint8_t allocated : 1;  // allocated pages
+    uint8_t kernel_pg : 1;  // kernel pages
+    uint32_t reserved : 30; // reserved pages
 } page_flags_t;
 
 typedef struct page {
-    uint32_t mapped_vaddr;  // virtual addresses mapped
-    page_flags_t flags;     // page flags
+    uint32_t mapped_vaddr; // virtual addresses mapped
+    page_flags_t flags;    // page flags
     DEFINE_LINK(page);
 } page_t;
 
-
 void mem_init(atag_t *atags);
 
-/** 
+/**
  * Page Allocate
  */
 void *palloc(void);
